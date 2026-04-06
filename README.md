@@ -20,55 +20,37 @@ The primary objective of this dashboard is to:
 
 ## Key Features
 
-- **KPI Monitoring**
-  - Revenue tracking
-  - Order volume analysis
-  - Risk flag indicators
-  - Duplicate transaction detection
+### KPI Monitoring
+- Revenue tracking  
+- Order volume analysis  
+- Risk flag indicators  
+- Duplicate transaction detection  
 
-- **Audit & Risk Analysis**
-  - High-risk transaction identification  
-  - Anomaly detection (duplicate entries, cost spikes)  
-  - Risk categorization and tracking  
+### Audit and Risk Analysis
+- High-risk transaction identification  
+- Anomaly detection (duplicate entries, cost spikes)  
+- Risk categorization and tracking  
 
-- **Financial Insights**
-  - Revenue breakdown by kitchen stations  
-  - Payment method distribution (UPI, Card, Cash, etc.)  
-  - Cost category analysis  
+### Financial Insights
+- Revenue breakdown by kitchen stations  
+- Payment method distribution (UPI, Card, Cash, etc.)  
+- Cost category analysis  
 
-- **Data Visualization**
-  - Bar charts for station-wise revenue  
-  - Donut charts for payment methods  
-  - Line charts for revenue trends  
-  - Heatmap for risk intensity  
+### Data Visualization
+- Bar charts for station-wise revenue  
+- Donut charts for payment methods  
+- Line charts for revenue trends  
+- Heatmap for risk intensity  
 
-- **Transaction Management**
-  - Complete order and transaction ledger  
-  - Status tracking (Flagged, Under Review, Approved)  
+### Transaction Management
+- Complete order and transaction ledger  
+- Status tracking (Flagged, Under Review, Approved)  
 
-- **Interactive Dashboard**
-  - Station-based filtering  
-  - Time-based filtering  
-  - Payment mode filtering  
-  - Real-time refresh capability  
-
----
-
-## System Design
-
-The dashboard is implemented as a single-page web application using:
-
-- **HTML** for structure  
-- **CSS** for styling and layout  
-- **JavaScript** for interactivity  
-- **Chart.js** for data visualization  
-
-The design follows a modular layout with:
-
-- Sidebar navigation  
-- Top control panel  
-- Multi-section dashboard views  
-- Responsive grid-based layout  
+### Interactive Dashboard
+- Station-based filtering  
+- Time-based filtering  
+- Payment mode filtering  
+- Real-time refresh capability  
 
 ---
 
@@ -96,23 +78,25 @@ This allows demonstration of audit workflows without relying on sensitive real-w
 
 ---
 
-## Limitations
+## Audit Scope
 
-- No backend integration (static data)  
-- No real-time database connectivity  
-- No authentication or user management system  
-- Data updates are not persisted  
+- Domain: Catering and Kitchen Operations  
+- Period: April 2026  
+- Focus Areas: Financial Transactions, Operational Performance, Risk Indicators  
+- Findings: Multiple high-risk flags, duplicate entries, and cost anomalies identified through dashboard analytics  
 
 ---
 
-## Future Enhancements
+## Author
 
-- Backend integration (Node.js / Spring Boot / Django)  
-- Database connectivity (MySQL / MongoDB)  
-- User authentication and role-based access  
-- Real-time data streaming  
-- Exportable audit reports (PDF/CSV)  
-- Advanced anomaly detection using machine learning  
+Ashok N  
+B.E. Computer Science and Engineering (Cyber Security)  
+
+---
+
+## Guided By
+
+Shanmugaraju S  
 
 ---
 
