@@ -96,7 +96,7 @@ B.E. Computer Science and Engineering (Cyber Security)
 
 ## Guided By
 
-Shanmugaraju S  
+https://www.linkedin.com/in/shanmugaraju-s/
 
 ---
 
