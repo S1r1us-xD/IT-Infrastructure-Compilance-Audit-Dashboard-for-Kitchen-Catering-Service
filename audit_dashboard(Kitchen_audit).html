@@ -6,6 +6,7 @@
 <title>Kitchen Audit Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root {
   --paper:        #f3ece0;
@@ -272,7 +273,8 @@ tbody td.amount{font-family:'JetBrains Mono',monospace;font-size:12px;font-weigh
       <option>All Payments</option><option>Card</option><option>UPI</option><option>Cash</option><option>Room Charge</option>
     </select>
     <div class="live-badge"><span class="live-dot"></span>Live Feed</div>
-    <button class="btn-refresh" onclick="doRefresh()">↺ Refresh</button>
+    <button class="btn-refresh" onclick="generateFinalReport()">⇩ Finalized Report</button>
+    <button class="btn-refresh refresh-main" onclick="doRefresh()">↺ Refresh</button>
   </div>
 </header>
 
@@ -427,20 +429,68 @@ tbody td.amount{font-family:'JetBrains Mono',monospace;font-size:12px;font-weigh
   <div class="page" id="pg-reports">
     <div class="report-hd">
       <div>
-        <div class="report-eyebrow">IT Audit Report · Q1 2026</div>
-        <div class="report-title">Kitchen Operations Audit Findings</div>
+        <div class="report-eyebrow">Finalized Internal Audit Report · April 2026</div>
+        <div class="report-title">Catering Operations Audit Report</div>
         <div class="report-meta">
-          Prepared by: <strong>Ashok N</strong> — Lead Auditor &nbsp;·&nbsp;
-          Entity: <strong>Restaurant Kitchen Operations</strong> &nbsp;·&nbsp;
-          Period: <strong>Jan – Mar 2026</strong>
+          Prepared by: <strong>Ashok N</strong> &nbsp;·&nbsp;
+          Guided by: <strong>Shanmugaraju S</strong> &nbsp;·&nbsp;
+          Scope: <strong>Catering Finance, POS Controls, Inventory and Shift Reconciliation</strong>
         </div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
         <span class="tag tag-t" style="font-size:10px;padding:5px 12px">3 Critical</span>
         <span class="tag tag-a" style="font-size:10px;padding:5px 12px">4 Major</span>
-        <span class="tag tag-n" style="font-size:10px;padding:5px 12px">5 Minor</span>
+        <span class="tag tag-n" style="font-size:10px;padding:5px 12px">3 Minor</span>
+        <button class="btn-refresh" onclick="generateFinalReport()">⇩ Download Finalized Report</button>
       </div>
     </div>
+
+    <div class="s-label">Executive Summary</div>
+    <div class="col-2b">
+      <div class="panel">
+        <div class="ph"><div><div class="ph-title">Audit Scope</div><div class="ph-sub">Operational and financial review for April 2026</div></div><span class="tag tag-n">Scope</span></div>
+        <div class="pb">
+          <div class="srow"><div><div class="srow-name">Coverage</div><div class="srow-desc">Procurement, POS, payment reconciliation, vendor controls, inventory and shift closure</div></div></div>
+          <div class="srow"><div><div class="srow-name">Audit Period</div><div class="srow-desc">01 April 2026 to 30 April 2026</div></div></div>
+          <div class="srow"><div><div class="srow-name">Methods Used</div><div class="srow-desc">Ledger review, exception analysis, trend review, sample testing and control observation</div></div></div>
+          <div class="srow" style="border:none"><div><div class="srow-name">Overall Opinion</div><div class="srow-desc">Control environment requires improvement in duplicate prevention, authorization flow and reconciliation discipline</div></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="ph"><div><div class="ph-title">Report Snapshot</div><div class="ph-sub">High-level conclusion and impact</div></div><span class="tag tag-t">Summary</span></div>
+        <div class="pb">
+          <div class="risk-row" style="grid-template-columns:repeat(3,1fr);margin-bottom:0">
+            <div class="rtile rt-high" data-n="3" style="padding:16px 14px"><div class="rtile-lbl">Critical</div><div class="rtile-num" style="font-size:34px">3</div><div class="rtile-desc">Immediate management action</div></div>
+            <div class="rtile rt-med" data-n="4" style="padding:16px 14px"><div class="rtile-lbl">Major</div><div class="rtile-num" style="font-size:34px">4</div><div class="rtile-desc">Corrective action required</div></div>
+            <div class="rtile rt-low" data-n="3" style="padding:16px 14px"><div class="rtile-lbl">Minor</div><div class="rtile-num" style="font-size:34px">3</div><div class="rtile-desc">Monitor and close</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-label">Management Dashboard Summary</div>
+    <div class="col-2b">
+      <div class="panel">
+        <div class="ph"><div><div class="ph-title">Key Observations</div><div class="ph-sub">Primary issues identified during review</div></div><span class="tag tag-a">Observed</span></div>
+        <div class="pb">
+          <div class="srow"><div><div class="srow-name">Duplicate invoice exposure</div><div class="srow-desc">Triplicate processing identified for supplier invoice AGRO-2026-218</div></div><span class="tag tag-t">₹11,52,000</span></div>
+          <div class="srow"><div><div class="srow-name">Revenue leakage risk</div><div class="srow-desc">Cached credentials enabled post-shift void activity without secondary authorization</div></div><span class="tag tag-t">₹74,600</span></div>
+          <div class="srow"><div><div class="srow-name">Settlement mismatch</div><div class="srow-desc">POS and gateway totals diverged on 14 out of 30 days</div></div><span class="tag tag-a">₹84,200</span></div>
+          <div class="srow" style="border:none"><div><div class="srow-name">Policy non-compliance</div><div class="srow-desc">Late approvals, missing reason codes and absent shift reports reduced audit traceability</div></div><span class="tag tag-n">Control Gap</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="ph"><div><div class="ph-title">Recommended Actions</div><div class="ph-sub">Priority response expected from management</div></div><span class="tag tag-o">Action Plan</span></div>
+        <div class="pb">
+          <div class="srow"><div><div class="srow-name">Deploy duplicate invoice rule</div><div class="srow-desc">Match invoice reference, amount and vendor within a rolling validation window</div></div><span class="tag tag-t">Immediate</span></div>
+          <div class="srow"><div><div class="srow-name">Revoke cached credentials</div><div class="srow-desc">Introduce one-time managerial tokens for every high-risk void and off-shift approval</div></div><span class="tag tag-t">Immediate</span></div>
+          <div class="srow"><div><div class="srow-name">Automate daily reconciliation</div><div class="srow-desc">Generate variance alerts for settlement gaps above defined tolerance</div></div><span class="tag tag-a">7 Days</span></div>
+          <div class="srow" style="border:none"><div><div class="srow-name">Enforce mandatory reason codes</div><div class="srow-desc">Make override causes, shift closure reports and vendor onboarding evidence non-optional</div></div><span class="tag tag-n">14 Days</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-label">Detailed Findings</div>
     <div id="findings-list"></div>
   </div>
 
@@ -780,7 +830,166 @@ const findings=[
 
 // ── UTILS ────────────────────────────────
 function filterAnim(){const c=document.querySelector('.canvas');c.style.opacity='0.6';c.style.transition='opacity 0.3s';setTimeout(()=>{c.style.opacity='1';},320);}
-function doRefresh(){const b=document.querySelector('.btn-refresh');b.innerHTML='↺ Syncing…';b.style.opacity='0.65';setTimeout(()=>{b.innerHTML='↺ Refresh';b.style.opacity='1';},1400);}
+function doRefresh(){
+  const b=document.querySelector('.refresh-main') || document.querySelector('.btn-refresh');
+  if(!b) return;
+  const original=b.innerHTML;
+  b.innerHTML='↺ Syncing…';
+  b.style.opacity='0.65';
+  setTimeout(()=>{b.innerHTML=original;b.style.opacity='1';},1400);
+}
+
+function splitText(doc,text,maxWidth){
+  return doc.splitTextToSize(text,maxWidth);
+}
+
+function addWrappedText(doc,text,x,y,maxWidth,lineGap=6){
+  const lines=splitText(doc,text,maxWidth);
+  doc.text(lines,x,y);
+  return y + (lines.length*lineGap);
+}
+
+function generateFinalReport(){
+  const jsPDF = window.jspdf && window.jspdf.jsPDF;
+  if(!jsPDF){
+    alert('Report library failed to load. Please check your internet connection and try again.');
+    return;
+  }
+
+  const doc = new jsPDF({orientation:'p',unit:'mm',format:'a4'});
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const margin = 16;
+  let y = 18;
+
+  const addHeader = (subtitle='Finalized Internal Audit Report') => {
+    doc.setFillColor(236,227,206);
+    doc.rect(0,0,pageW,20,'F');
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(18);
+    doc.text('Catering Operations Audit Report', margin, 12);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(9);
+    doc.text(subtitle, margin, 17);
+  };
+
+  const addFooter = (pageNum) => {
+    doc.setDrawColor(212,196,160);
+    doc.line(margin,pageH-12,pageW-margin,pageH-12);
+    doc.setFontSize(8);
+    doc.setTextColor(114,99,76);
+    doc.text(`Prepared by Ashok N`, margin, pageH-7);
+    doc.text(`Page ${pageNum}`, pageW-margin, pageH-7, {align:'right'});
+    doc.setTextColor(30,24,16);
+  };
+
+  const ensure = (needed=12) => {
+    if(y + needed > pageH - 18){
+      addFooter(doc.getNumberOfPages());
+      doc.addPage();
+      y = 18;
+      addHeader('Finalized Internal Audit Report (continued)');
+      y = 28;
+    }
+  };
+
+  addHeader();
+  y = 28;
+
+  doc.setFontSize(10);
+  doc.setFont('helvetica','normal');
+  doc.text('Auditor: Ashok N', margin, y);
+  doc.text('Guided by: Shanmugaraju S', 80, y);
+  doc.text('Period: April 2026', 155, y);
+  y += 10;
+
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(12);
+  doc.text('1. Executive Summary', margin, y);
+  y += 7;
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(10);
+  y = addWrappedText(doc, 'This finalized internal audit report covers catering operations with emphasis on procurement controls, payment processing, POS exceptions, inventory discipline, shift closure practices and management approvals. The review identified high-impact issues in duplicate invoice processing, post-shift void authorization and daily settlement reconciliation. Overall, the control environment is functional but requires immediate strengthening in preventive and detective controls.', margin, y, pageW - margin*2, 5);
+  y += 4;
+
+  ensure(28);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(12);
+  doc.text('2. Audit Snapshot', margin, y);
+  y += 8;
+  const boxes=[
+    ['Critical Findings','3'],['Major Findings','4'],['Minor Findings','3'],['Monthly Revenue','₹14,28,650']
+  ];
+  let x=margin;
+  boxes.forEach((b,i)=>{
+    doc.setDrawColor(212,196,160);
+    doc.setFillColor(243,236,224);
+    doc.roundedRect(x,y,42,20,2,2,'FD');
+    doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.text(b[0],x+3,y+7);
+    doc.setFontSize(12); doc.setFont('helvetica','bold'); doc.text(b[1],x+3,y+15);
+    x += 44;
+  });
+  y += 28;
+
+  ensure(30);
+  doc.setFont('helvetica','bold'); doc.setFontSize(12);
+  doc.text('3. Scope and Methodology', margin, y);
+  y += 7;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  const bullets=[
+    'Scope included procurement records, vendor onboarding checks, POS voids, payment settlement variance, station-level spend review and shift reconciliation records.',
+    'Testing approach included ledger review, exception testing, trend comparison, authorization walkthrough and control observation.',
+    'Sample period reviewed: 01 April 2026 to 30 April 2026 across all major kitchen stations and related financial workflows.'
+  ];
+  bullets.forEach(t=>{ ensure(10); doc.text('•', margin, y); y=addWrappedText(doc,t,margin+5,y,pageW-(margin*2)-5,5)+1; });
+
+  ensure(16);
+  doc.setFont('helvetica','bold'); doc.setFontSize(12);
+  doc.text('4. Key Findings', margin, y);
+  y += 7;
+
+  const selectedFindings = findings.slice(0,6);
+  selectedFindings.forEach((f,idx)=>{
+    ensure(28);
+    doc.setDrawColor(212,196,160);
+    doc.setFillColor(243,236,224);
+    doc.roundedRect(margin,y,pageW-(margin*2),22,2,2,'FD');
+    doc.setFont('helvetica','bold'); doc.setFontSize(10);
+    const sev = f.sev==='c' ? 'CRITICAL' : f.sev==='m' ? 'MAJOR' : 'MINOR';
+    doc.text(`${f.id}  |  ${sev}`, margin+3, y+6);
+    doc.text(f.title, margin+3, y+12);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+    let yy = addWrappedText(doc,f.body,margin+3,y+17,pageW-(margin*2)-6,4.2);
+    y = yy + 4;
+    ensure(12);
+    doc.setFont('helvetica','italic');
+    y = addWrappedText(doc, `Recommendation: ${f.rec}`, margin+3, y, pageW-(margin*2)-6, 4.2) + 5;
+    doc.setFont('helvetica','normal');
+  });
+
+  ensure(24);
+  doc.setFont('helvetica','bold'); doc.setFontSize(12);
+  doc.text('5. Management Recommendations', margin, y);
+  y += 7;
+  const recs=[
+    'Implement duplicate invoice validation at accounts-payable level with invoice reference, amount and vendor match logic.',
+    'Enforce session-bound managerial approval tokens for post-shift voids, high-value procurement and override events.',
+    'Automate daily settlement reconciliation between POS totals and gateway settlement reports with exception threshold alerts.',
+    'Make reason codes, vendor onboarding evidence and shift-close reports mandatory to improve traceability and accountability.'
+  ];
+  recs.forEach(t=>{ ensure(9); doc.text('•', margin, y); y=addWrappedText(doc,t,margin+5,y,pageW-(margin*2)-5,5)+1; });
+
+  ensure(18);
+  doc.setFont('helvetica','bold'); doc.setFontSize(12);
+  doc.text('6. Conclusion', margin, y);
+  y += 7;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  y = addWrappedText(doc, 'The audit indicates that the operation has a usable reporting base, but control weaknesses around authorization, reconciliation and exception handling create measurable financial and compliance exposure. Timely remediation of the critical findings will significantly improve operational transparency and audit readiness.', margin, y, pageW - margin*2, 5);
+
+  addFooter(doc.getNumberOfPages());
+  doc.save('catering-operations-finalized-audit-report.pdf');
+}
+
 </script>
 </body>
 </html>
