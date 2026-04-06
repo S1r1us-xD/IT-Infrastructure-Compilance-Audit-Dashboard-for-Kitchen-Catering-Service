@@ -1,3 +1,5 @@
+# Catering Audit & Risk Analytics Dashboard
+
 ## Overview
 
 This project is a web-based audit and monitoring dashboard designed for catering and kitchen operations. It provides a structured interface to track financial activity, operational performance, and risk indicators across different kitchen stations.
